@@ -1,7 +1,11 @@
 <template>
     <div id="display">
         <ul>
-            <li v-for="todo in todos" v-bind:key="todo.id">{{ todo.text }}</li>
+            <TodoItem 
+                v-for="todo in todos" 
+                v-bind:key="todo.id" 
+                v-bind:text="todo.text" 
+                v-on:clickDeleteItem="handleDeleteTodo(todo.id)"></TodoItem>
         </ul>
         <UserInput v-on:userInputSubmit="handleSubmitTodo"></UserInput>
     </div>
@@ -9,11 +13,13 @@
 
 <script>
   import UserInput from './UserInput.vue';
+  import TodoItem from './TodoItem.vue';
 
 export default {
     name: 'TodosDisplay',
     components: {
-        UserInput
+        UserInput,
+        TodoItem
     },
     data: function() {
         return {
@@ -26,6 +32,9 @@ export default {
                 id: this.todos.length,
                 text
             })
+        },
+        handleDeleteTodo: function(id) {
+            this.todos.splice(id, 1);
         }
     }
 }
