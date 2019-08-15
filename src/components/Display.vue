@@ -34,7 +34,8 @@ export default {
             })
         },
         handleDeleteTodo: function(id) {
-            this.todos.splice(id, 1);
+            this.todos = this.todos.filter( (todo) => { return todo.id !== id });
+        //    this.todos.splice(id, 1);
         }
     }
 }
